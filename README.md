@@ -8,7 +8,7 @@ A four-page Power BI report built on SQLBI's Contoso Data Generator V2 dataset (
 
 ![Executive Overview](Contoso%20Overview.png)
 
-**Sales Breakdown:** orders vs. gross profit by category, and average delivery days (card and by year).
+**Sales Breakdown:** orders vs. gross profit by category, average delivery days, and average delivery days by year.
 
 ![Sales Breakdown](Contoso%20Sales%20Breakdown.png)
 
@@ -31,7 +31,7 @@ A four-page Power BI report built on SQLBI's Contoso Data Generator V2 dataset (
 
 ## Notes on the Numbers
 
-- **Gross profit = quantity x (unit price - unit cost)**, using list price. Using net price (after discounts) gives $122.3M instead of $136.1M, about 10% lower.
+- **Gross profit = revenue - cost.** Revenue is quantity x unit price and cost is quantity x unit cost. This uses list price, before discounts. Using net price (after discounts) gives $122.3M instead of $136.1M, about 10% lower.
 - **Average delivery days covers online orders only.** In-store orders have no delivery time (0 days), so including them would drag the average down to about 1.3.
 - **Age groups:** Young Adults = under 35, Mid-Life = 35 to 59, Seniors = 60 and over.
 - **"vs Prior" cards** compare against the previous period once a date is selected, so they show 0.0% with no date filter. Cost has no good/bad coloring, since a cost increase isn't automatically bad.
