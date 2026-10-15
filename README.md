@@ -39,9 +39,18 @@ A four-page Power BI report built on SQLBI's Contoso Data Generator V2 dataset (
 
 ## How It Was Built
 
-- Source: SQLBI Contoso 100K CSV files, loaded and shaped in Power Query
-- Star schema model: a Sales fact table with Product, Store, Customer and Date dimensions
-- DAX measures and Power Query (M) code: see [dax-and-m-code.md](dax-and-m-code.md)
+**Data preparation (Power Query)**
+- Loaded the Contoso CSV tables and profiled each one, checking names, spelling and data types.
+- Renamed columns to clear, consistent names so the tables relate cleanly.
+- Set the correct data type for each column.
+- Kept rows with missing values in non-key columns instead of dropping them. Roughly 30,000 rows had blank zip codes, and removing them would have thrown away valid orders over a column the report doesn't use. The order and customer keys on those rows were intact.
+- Added an Age Group column (M code, written with AI assistance).
+
+**Data model**
+- Star schema: a Sales fact table with Product, Store, Customer and Date dimensions.
+
+**DAX**
+- Measures and the Power Query (M) code: see [dax-and-m-code.md](dax-and-m-code.md)
 
 ## Tools
 
