@@ -4,7 +4,7 @@ The code behind the Contoso report: DAX measures and the one Power Query step wr
 
 ## Authorship
 
-**Written by me:** the base measures (Total Revenue, Total Cost, Gross Profit, Margin %, Total Orders, Total Customers) and the time intelligence measures (prior year and YoY % for each KPI card).
+**Written by me:** the base measures (Total Revenue, Total Cost, Total Orders, Total Customers), the calculated measures built from them (Gross Profit, Margin %), and the time intelligence measures (prior year and YoY % for each KPI card).
 
 **Written with AI assistance:** Avg Delivery Days, Gross Profit YoY Label, Row Flag, and the Age Group step in Power Query (M). I described what each one needed to do and reviewed the results in the report to confirm they behaved correctly. I can read the M code (a conditional column: if this, then that, with a fallback value), but I can't write the syntax from scratch. I chose the age cutoffs with AI's help.
 
@@ -27,6 +27,16 @@ Total Cost =
 SUMX ( Sales, Sales[UnitCost] * Sales[Quantity] )
 ```
 
+#### Total Orders and Total Customers
+
+```dax
+Total Orders = DISTINCTCOUNT ( Sales[OrderKey] )
+
+Total Customers = DISTINCTCOUNT ( Sales[CustomerKey] )
+```
+
+### Calculated measures
+
 #### Gross Profit
 
 ```dax
@@ -43,17 +53,9 @@ RETURN
     DIVIDE ( Revenue - Cost, Revenue )
 ```
 
-#### Total Orders and Total Customers
-
-```dax
-Total Orders = DISTINCTCOUNT ( Sales[OrderKey] )
-
-Total Customers = DISTINCTCOUNT ( Sales[CustomerKey] )
-```
-
 ### Time intelligence
 
-Each of the five KPI cards has a base measure, a prior-year measure, a YoY % measure, and a label measure. The pattern is the same for every card, so three examples are shown here instead of the full set.
+Each of the five KPI cards has a base or calculated measure, a prior-year measure, a YoY % measure, and a label measure. The pattern is the same for every card, so three examples are shown here instead of the full set.
 
 #### Gross Profit PY
 
