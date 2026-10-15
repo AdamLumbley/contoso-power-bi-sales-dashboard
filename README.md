@@ -34,7 +34,7 @@ A four-page Power BI report built on SQLBI's Contoso Data Generator V2 dataset (
 - **Gross profit = revenue - cost.** Revenue is quantity x unit price and cost is quantity x unit cost. This uses list price, before discounts. Using net price (after discounts) gives $122.3M instead of $136.1M, about 10% lower.
 - **Average delivery days covers online orders only.** In-store orders have no delivery time (0 days), so including them would drag the average down to about 1.3.
 - **Age groups:** Young Adults = under 35, Mid-Life = 35 to 59, Seniors = 60 and over.
-- **"vs Prior" cards** compare against the previous period once a date is selected, so they show 0.0% with no date filter. Cost has no conditional formatting, because a cost increase isn't necessarily bad. Higher costs can indicate higher order counts, which is why gross profit and my other cards do get conditional formatting but total costs do not.
+- **"vs Prior" cards** compare against the previous period once a date is selected, so they show 0.0% with no date filter. The cost card has no good/bad coloring, because a cost increase isn't necessarily bad: higher costs often come with higher order counts. The other cards do get it.
 - Contoso is synthetic data, so the charts show patterns in the dataset, not real business causes.
 
 ## How It Was Built
@@ -44,7 +44,7 @@ A four-page Power BI report built on SQLBI's Contoso Data Generator V2 dataset (
 - Renamed columns to clear, consistent names so the tables relate cleanly.
 - Set the correct data type for each column.
 - Kept rows with missing values in non-key columns instead of dropping them. Roughly 30,000 rows had blank zip codes, and removing them would have thrown away valid orders over a column the report doesn't use. The order and customer keys on those rows were intact.
-- Added an Age Group column (M code, written by Claude).
+- Added an Age Group column (M code, written with AI assistance).
 
 **Data model**
 - Star schema: a Sales fact table with Product, Store, Customer and Date dimensions.
