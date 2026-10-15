@@ -4,19 +4,19 @@ A four-page Power BI report built on SQLBI's Contoso Data Generator V2 dataset (
 
 ## The Report
 
-**Executive Overview:** orders, revenue, cost, gross profit and margin %, gross profit by category and subcategory, and gross profit by year.
+**Executive Overview:** Orders, revenue, cost, gross profit and margin %, gross profit by category and subcategory, and gross profit by year.
 
 ![Executive Overview](Contoso%20Overview.png)
 
-**Sales Breakdown:** orders vs. gross profit by category, average delivery days, and average delivery days by year.
+**Sales Breakdown:** Orders vs. gross profit by category, average delivery days, and average delivery days by year.
 
 ![Sales Breakdown](Contoso%20Sales%20Breakdown.png)
 
-**Store Performance:** online vs. in-store split, top 10 stores, and online vs. in-store gross profit over time.
+**Store Performance:** Online vs. in-store split, top 10 stores, and online vs. in-store gross profit over time.
 
 ![Store Performance](Contoso%20Store%20Performance.png)
 
-**Customer Insights:** gross profit by customer continent, age group, channel and gender, plus customers by age group.
+**Customer Insights:** Gross profit by customer continent, age group, channel and gender, plus customers by age group.
 
 ![Customer Insights](Contoso%20Customer%20Insights.png)
 
