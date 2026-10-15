@@ -41,8 +41,7 @@ A four-page Power BI report built on SQLBI's Contoso Data Generator V2 dataset (
 
 - Source: SQLBI Contoso 100K CSV files, loaded and shaped in Power Query
 - Star schema model: a Sales fact table with Product, Store, Customer and Date dimensions
-- DAX measures and Power Query logic: see [dax-measures.md](dax-measures.md)
-- Figures were checked against the raw CSVs
+- DAX measures and Power Query (M) code: see [dax-and-m-code.md](dax-and-m-code.md)
 
 ## Tools
 
