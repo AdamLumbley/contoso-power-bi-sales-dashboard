@@ -4,7 +4,7 @@ The code behind the Contoso report: DAX measures and the one Power Query step wr
 
 ## Authorship
 
-**Written by me:** the base measures (Total Revenue, Total Cost, Total Orders, Total Customers), the calculated measures built from them (Gross Profit, Margin %), and the time intelligence measures (prior year and YoY % for each KPI card).
+**Written by me:** the base measures (Total Revenue, Total Cost, Total Orders, Total Customers), the calculated measures built from them (Gross Profit, Margin %), and the time intelligence measures (prior year and YoY % for every KPI card).
 
 **Written with AI assistance:** Avg Delivery Days, Gross Profit YoY Label, Row Flag, and the Age Group step in Power Query (M). I described what each one needed to do and reviewed the results in the report to confirm they behaved correctly. I can read the M code (a conditional column: if this, then that, with a fallback value), but I can't write the syntax from scratch. I chose the age cutoffs with AI's help.
 
