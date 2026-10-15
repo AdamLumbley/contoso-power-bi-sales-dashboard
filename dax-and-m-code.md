@@ -1,6 +1,11 @@
 # DAX and Power Query (M) Code
 
-The code behind the Contoso report: DAX measures and one Power Query (M) step. Items written with AI assistance are marked. I reviewed their logic and checked the output against the source data.
+The code behind the Contoso report: DAX measures and one Power Query (M) step.
+
+## Authorship
+
+- **Written by me:** the base measures (Total Revenue, Total Cost, Gross Profit, Margin %, Total Orders, Total Customers) and the time intelligence measures (prior year and YoY % for each KPI card).
+- **Written with AI assistance:** Avg Delivery Days, Gross Profit YoY Label, Row Flag, and the Age Group step in Power Query (M). I described what I needed, then reviewed the logic and checked the output against the source data. I can read and explain this code, but I could not write the M code on my own.
 
 ## DAX
 
@@ -47,7 +52,7 @@ Total Customers = DISTINCTCOUNT ( Sales[CustomerKey] )
 
 ### Time intelligence
 
-Prior-year and year-over-year measures for the KPI cards. Three examples are shown here. Each KPI card (revenue, cost, orders and the rest) has its own PY and YoY % measure built the same way.
+Each of the five KPI cards has a base measure, a prior-year measure, a YoY % measure, and a label measure. The pattern is the same for every card, so three examples are shown here instead of the full set.
 
 #### Gross Profit PY
 
@@ -114,7 +119,7 @@ IF (
 ## Power Query (M)
 
 ### Age Group
-Buckets customers into three age groups.
+*Written with AI assistance.* Buckets customers into three age groups, similar in logic to a DAX SWITCH or a SQL CASE statement.
 
 ```m
 = Table.AddColumn(#"Changed Surname to Last Name", "Age Group", each
