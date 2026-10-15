@@ -1,6 +1,6 @@
 # DAX and Power Query (M) Code
 
-The code behind the Contoso report: DAX measures and one Power Query (M) step.
+The code behind the Contoso report: DAX measures and the one Power Query step written as M code. The rest of the Power Query work (renaming columns, setting data types, handling nulls) was done with the Power Query interface and is described in the main README.
 
 ## Authorship
 
@@ -118,6 +118,8 @@ IF (
 ```
 
 ## Power Query (M)
+
+Most of the Power Query cleanup was done through the interface (renaming columns, setting data types, keeping nulls in non-key columns). This is the one step written as M code.
 
 ### Age Group
 *Written with AI assistance.* Buckets customers into three age groups, similar in logic to a DAX SWITCH or a SQL CASE statement.
