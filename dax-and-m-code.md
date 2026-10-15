@@ -124,7 +124,7 @@ IF (
 Most of the Power Query cleanup was done through the interface (renaming columns, setting data types, keeping nulls in non-key columns). This is the one step written as M code.
 
 ### Age Group
-*Written with AI assistance.* I wanted to discover gross profit by age and noticed the cardinality of the column I found produced too much noise to analyze and communicate about concisely. I avoided a calculated column that would contribute towards model bloat so I chose to build a custom column. The column I built buckets customers into three age groups, similar in logic to a DAX SWITCH or a SQL CASE statement.
+*Written with AI assistance.* I wanted to discover gross profit by age and noticed the cardinality of the column I built produced too much noise to analyze and communicate about clearly. I avoided a calculated column that would contribute towards model bloat and chose a custom column instead. The column I built buckets customers into three age groups, similar in logic to a DAX SWITCH or a SQL CASE statement.
 
 ```m
 = Table.AddColumn(#"Changed Surname to Last Name", "Age Group", each
