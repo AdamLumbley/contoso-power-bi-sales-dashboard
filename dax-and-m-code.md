@@ -8,6 +8,19 @@ The code behind the Contoso report: DAX measures and the one Power Query step wr
 
 **Written with AI assistance:** Avg Delivery Days, Gross Profit YoY Label, Row Flag, and the Age Group step in Power Query (M). I described what each one needed to do and reviewed the results in the report to confirm they behaved correctly. I can read the M code (a conditional column: if this, then that, with a fallback value), but I can't write the syntax from scratch. I chose the age cutoffs with AI's help.
 
+## Measure Index
+
+| Measure | What it does |
+|---|---|
+| Total Revenue | List-price revenue before discounts |
+| Total Cost | Unit cost × quantity |
+| Total Orders / Total Customers | Distinct counts |
+| Gross Profit | Revenue minus cost |
+| Margin % | Gross profit as a share of revenue |
+| PY / YoY % / Label (×5 KPI cards) | Prior year, year-over-year change, and the "vs Prior" text on each card |
+| Avg Delivery Days | Online orders only, order date to delivery date |
+| Row Flag | Hardcoded presentation highlight (not live logic) |
+
 ## DAX
 
 ### Base measures
@@ -108,7 +121,7 @@ RETURN
 ```
 
 #### Row Flag
-*Written with AI assistance.* Returns a soft yellow hex for the two categories with high order volume and low gross profit. Used as the conditional formatting color on the category table.
+*Written with AI assistance.* Returns a soft yellow hex for the two categories with high order volume and low gross profit. Used as the conditional formatting color on the category table. **Intentionally hardcoded:** this highlights a one-time finding for presentation, not part of the live reporting logic. The rest of the report is built to refresh long-term.
 
 ```dax
 Row Flag =
