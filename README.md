@@ -54,4 +54,4 @@ A four-page Power BI report built on SQLBI's Contoso Data Generator V2 dataset (
 
 ## Tools
 
-Power BI Desktop, Power Query, DAX
+Power BI Desktop, Power Query, DAX Studio, DAX
