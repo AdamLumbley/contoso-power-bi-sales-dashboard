@@ -60,7 +60,7 @@ The five headline KPIs (orders, revenue, cost, gross profit, margin %) were reco
 - Restored the Contoso V2 100K backup in SQL Server Express and queried it in SSMS with T-SQL to confirm the dashboard's totals.
 
 **AI assistance**
-- Used Claude to write some of the DAX measures I didn't know how to write (noted in dax-and-m-code.md) and the Age Group M code, and for sanity checks and explanations. I designed the data model and report, built the visuals, and validated the numbers myself.
+- Used Claude to write some advanced DAX measures and the Age Group M code.
 
 ## Tools
 
