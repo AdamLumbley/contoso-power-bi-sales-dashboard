@@ -25,7 +25,7 @@ A four-page Power BI report that turns about 224,000 sales lines (93,000 orders,
 - **Computers drive the business.** They account for $59M of $136M total gross profit (about 43%).
 - **Online passed in-store in 2023.** Online gross profit hit $14.7M vs. $12.6M in-store, and it has stayed ahead since. Over the full period, in-store is 60% of gross profit and online is 40%.
 - **Some categories sell a lot but earn little.** Music, Movies and Audio Books (30K orders, $7.9M) and Games and Toys (20K orders, $1.1M) have high order volume and low gross profit.
-- **Online delivery got much faster.** Average delivery time fell from 8.7 days in 2016 to about 3 days from 2022 on, then leveled off. The overall online average is 3.25 days.
+- **Online delivery got much faster.** Average delivery time fell from 8.7 days in 2016 to about 3 days from 2023 on, then leveled off. The overall online average is 3.25 days.
 - **Customer groups spend about the same.** Seniors and Mid-Life each have about 20K customers and Young Adults have 13K. Gross profit per customer is roughly $2.5K in all three groups, so the older groups contribute more because there are more of them. Gender splits 50/50.
 - **Stores are tightly clustered.** The top 10 physical stores each earn $2.0M to $2.5M in gross profit.
 
@@ -36,7 +36,7 @@ The five headline KPIs (orders, revenue, cost, gross profit, margin %) were reco
 ## Notes on the Numbers
 
 - **Gross profit = revenue - cost.** Revenue is quantity x unit price and cost is quantity x unit cost. This uses list price, before discounts. Using net price (after discounts) gives $122.3M instead of $136.1M, about 10% lower.
-- **Average delivery days covers online orders only.** In-store orders have no delivery time (0 days), so including them would drag the average down to about 1.3.
+- **Average delivery days covers online orders only.** In-store orders have no delivery time (0 days), so including them would drag the average down to about 1.4.
 - **Age groups:** Young Adults = under 35, Mid-Life = 35 to 59, Seniors = 60 and over.
 - **"vs Prior" cards** compare against the previous period once a date is selected, so they show 0.0% with no date filter. The cost card has no good/bad coloring, because a cost increase isn't necessarily bad: higher costs often come with higher order counts. The other cards do get it.
 - Contoso is synthetic data, so the charts show patterns in the dataset, not real business causes.
@@ -47,7 +47,7 @@ The five headline KPIs (orders, revenue, cost, gross profit, margin %) were reco
 - Loaded the Contoso CSV tables and profiled each one, checking headers, nulls, spelling, and data types.
 - Renamed columns to clear, consistent names so the tables relate cleanly.
 - Set the correct data type for each column.
-- Made a judgment call on missing data: kept rows with blanks in non-key columns instead of dropping them. Roughly 30,000 rows had blank zip codes, and removing them would have thrown away valid orders over a column the report doesn't use. The order and customer keys on those rows were intact.
+- Profiled the dataset and found no structural damage: no nulls in any key column. Preserved nulls in descriptive columns (such as Company, Weight, and CloseDate) where a blank doesn't affect any measure, instead of dropping rows, so no valid orders were lost.
 - Added an Age Group column (M code, written with AI assistance).
 
 **Data model**
@@ -57,10 +57,10 @@ The five headline KPIs (orders, revenue, cost, gross profit, margin %) were reco
 - Measures and the Power Query (M) code: see [dax-and-m-code.md](dax-and-m-code.md)
 
 **SQL validation**
-- Restored the Contoso V2 100K backup in SQL Server Express and queried it in SSMS with T-SQL (joins, aggregates, CTEs, and window functions) to confirm the dashboard's totals.
+- Restored the Contoso V2 100K backup in SQL Server Express and queried it in SSMS with T-SQL to confirm the dashboard's totals.
 
 **AI assistance**
-- Used Claude for sanity checks, explanations, and help with the Age Group M code. The modeling, measures, visuals, and validation are my own work.
+- Used Claude to write some of the DAX measures I didn't know how to write (noted in dax-and-m-code.md) and the Age Group M code, and for sanity checks and explanations. I designed the data model and report, built the visuals, and validated the numbers myself.
 
 ## Tools
 
