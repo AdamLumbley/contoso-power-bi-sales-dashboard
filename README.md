@@ -28,6 +28,7 @@ A four-page Power BI report that turns about 224,000 sales lines (93,000 orders,
 - **Online delivery got much faster.** Average delivery time fell from 8.7 days in 2016 to about 3 days from 2023 on, then leveled off. The overall online average is 3.25 days.
 - **Customer groups spend about the same.** Seniors and Mid-Life each have about 20K customers and Young Adults have 13K. Gross profit per customer is roughly $2.5K in all three groups, so the older groups contribute more because there are more of them. Gender splits 50/50.
 - **Stores are tightly clustered.** The top 10 physical stores each earn $2.0M to $2.5M in gross profit.
+- **Store closures were concentrated early.** 16 of the 74 stores in the Store table have a close date. Seven closed in 2015, and one to three closed in each of the other years from 2013 to 2019. None have closed since. Contoso is synthetic, so this shows when closures happened, not why.
 
 ## Validation
 
