@@ -1,6 +1,6 @@
 # Contoso Sales Dashboard (Power BI)
 
-A four-page Power BI report built on SQLBI's Contoso Data Generator V2 dataset (100K-order version): about 93,000 orders and 224,000 sales lines from 2016 to 2025.
+A four-page Power BI report that turns about 224,000 sales lines (93,000 orders, 2016 to 2025) into answers an executive can act on: **$136M in gross profit at a 58.5% margin**, where it comes from, and how the business is shifting online. Built on SQLBI's Contoso Data Generator V2 (100K-order version) and cross-checked against a SQL Server database in T-SQL.
 
 ## The Report
 
@@ -25,9 +25,13 @@ A four-page Power BI report built on SQLBI's Contoso Data Generator V2 dataset (
 - **Computers drive the business.** They account for $59M of $136M total gross profit (about 43%).
 - **Online passed in-store in 2023.** Online gross profit hit $14.7M vs. $12.6M in-store, and it has stayed ahead since. Over the full period, in-store is 60% of gross profit and online is 40%.
 - **Some categories sell a lot but earn little.** Music, Movies and Audio Books (30K orders, $7.9M) and Games and Toys (20K orders, $1.1M) have high order volume and low gross profit.
-- **Online delivery got much faster.** Average delivery time fell from 8.7 days in 2016 to about 3 days from 2022 on, and it leveled off after that. The overall online average is 3.25 days.
+- **Online delivery got much faster.** Average delivery time fell from 8.7 days in 2016 to about 3 days from 2022 on, then leveled off. The overall online average is 3.25 days.
 - **Customer groups spend about the same.** Seniors and Mid-Life each have about 20K customers and Young Adults have 13K. Gross profit per customer is roughly $2.5K in all three groups, so the older groups contribute more because there are more of them. Gender splits 50/50.
 - **Stores are tightly clustered.** The top 10 physical stores each earn $2.0M to $2.5M in gross profit.
+
+## Validation
+
+The five headline KPIs (orders, revenue, cost, gross profit, margin %) were reconciled between the Power BI measures and T-SQL queries run against the Contoso V2 100K database in SQL Server Express. The results matched, for example gross profit of $136.1M.
 
 ## Notes on the Numbers
 
@@ -43,7 +47,7 @@ A four-page Power BI report built on SQLBI's Contoso Data Generator V2 dataset (
 - Loaded the Contoso CSV tables and profiled each one, checking headers, nulls, spelling, and data types.
 - Renamed columns to clear, consistent names so the tables relate cleanly.
 - Set the correct data type for each column.
-- Kept rows with missing values in non-key columns instead of dropping them. Roughly 30,000 rows had blank zip codes, and removing them would have thrown away valid orders over a column the report doesn't use. The order and customer keys on those rows were intact.
+- Made a judgment call on missing data: kept rows with blanks in non-key columns instead of dropping them. Roughly 30,000 rows had blank zip codes, and removing them would have thrown away valid orders over a column the report doesn't use. The order and customer keys on those rows were intact.
 - Added an Age Group column (M code, written with AI assistance).
 
 **Data model**
@@ -52,6 +56,12 @@ A four-page Power BI report built on SQLBI's Contoso Data Generator V2 dataset (
 **DAX**
 - Measures and the Power Query (M) code: see [dax-and-m-code.md](dax-and-m-code.md)
 
+**SQL validation**
+- Restored the Contoso V2 100K backup in SQL Server Express and queried it in SSMS with T-SQL (joins, aggregates, CTEs, and window functions) to confirm the dashboard's totals.
+
+**AI assistance**
+- Used Claude for sanity checks, explanations, and help with the Age Group M code. The modeling, measures, visuals, and validation are my own work.
+
 ## Tools
 
-Power BI Desktop, Power Query, DAX Studio, DAX
+Power BI Desktop, Power Query, DAX, DAX Studio, SQL Server Express, T-SQL (SSMS), Claude
