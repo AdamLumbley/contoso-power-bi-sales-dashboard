@@ -53,6 +53,9 @@ The five headline KPIs (orders, revenue, cost, gross profit, margin %) were reco
 **Data model**
 - Star schema: a Sales fact table with Product, Store, Customer and Date dimensions.
 
+**Interactivity**
+- Three visuals have drill-down hierarchies: gross profit by year on Executive Overview and average delivery days on Sales Breakdown (both year > quarter > month), and gross profit by customer location on Customer Insights. Each one packs several levels of detail into a single visual, which freed up canvas space for other content. I left hierarchies off visuals that make one clear point, like the online vs. in-store trend behind the 2023 crossover.
+
 **DAX**
 - Measures and the Power Query (M) code: see [dax-and-m-code.md](dax-and-m-code.md)
 
@@ -60,7 +63,7 @@ The five headline KPIs (orders, revenue, cost, gross profit, margin %) were reco
 - Restored the Contoso V2 100K backup in SQL Server Express and queried it in SSMS with T-SQL to confirm the dashboard's totals.
 
 **AI assistance**
-- Used Claude to write some advanced DAX measures.
+- Used Claude to write some advanced DAX measures and the Age Group M code.
 
 ## Tools
 
