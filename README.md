@@ -72,7 +72,6 @@ The top 5 customers by gross profit were also reconciled three ways: a T-SQL que
 
 **Interactivity**
 - Four visuals have drill-down hierarchies: gross profit by year on Executive Overview, average delivery days by year and total orders by year on Sales Breakdown (all year > quarter > month), and gross profit by customer location on Customer Insights. Each one packs several levels of detail into a single visual, which freed up canvas space for other content. I left hierarchies off visuals that make one clear point, like the online vs. in-store trend behind the 2023 crossover.
-- The top 5 customers table uses a Top N filter on CustomerKey (not name, since many customers share a first name).
 
 **Visual formatting**
 - Converted all line charts to area charts and standardized them so trends read the same way on every page.
