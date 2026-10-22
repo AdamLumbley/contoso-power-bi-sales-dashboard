@@ -2,16 +2,25 @@
 
 A four-page Power BI report that turns about 224,000 sales lines (93,000 orders, 2016 to 2025) into answers an executive can act on: **$136M in gross profit at a 58.5% margin**, where it comes from, and how the business is shifting online. Built on SQLBI's Contoso Data Generator V2 (100K-order version) and cross-checked against a SQL Server database in T-SQL.
 
-**Download:** [Contoso Dashboard.pbix](Contoso%20Dashboard.pbix). Open it in Power BI Desktop (free, Windows) to explore the data model, DAX measures and interactive visuals.
+**Download:** [Contoso.pbix](https://github.com/AdamLumbley/contoso-power-bi-sales-dashboard/raw/main/Contoso.pbix) (about 16 MB)
 
 **Executive Overview:** Orders, revenue, cost, gross profit and margin %, gross profit by category and subcategory, and gross profit by year.
 
-![Executive Overview](Contoso%20Overview.png)
+![Executive Overview](Contoso%20Overview.png?v=2)
+
+## How to Open It
+
+1. Install [Power BI Desktop](https://www.microsoft.com/power-platform/products/power-bi/desktop) (free, Windows only).
+2. Download [Contoso.pbix](https://github.com/AdamLumbley/contoso-power-bi-sales-dashboard/raw/main/Contoso.pbix). On GitHub, open the file page and click the download icon.
+3. Open it in Power BI Desktop. The data is stored inside the file, so there is nothing else to set up.
+
+Don't click Refresh: the source CSVs live on my machine, and the data you see is already loaded. Use the model view to see the star schema, and the Data pane to browse the DAX measures (organized in display folders). The file also has a hidden work-in-progress page that isn't part of the four-page report.
 
 ## Key Findings
 
 - **Computers drive the business.** They account for $59M of $136M total gross profit (about 43%).
 - **Online passed in-store in 2023.** Online gross profit hit $14.7M vs. $12.6M in-store, and it has stayed ahead since. Over the full period, in-store is 60% of gross profit and online is 40%.
+- **Orders grew about 9x, peaked in 2023, then settled lower.** Annual orders rose from 2,111 in 2016 to a peak of 19,145 in 2023, with a dip in 2020. They then leveled off near 15.8K a year (15,899 in 2024 and 15,709 in 2025), about 18% below the peak.
 - **Some categories sell a lot but earn little.** Music, Movies and Audio Books (30K orders, $7.9M) and Games and Toys (20K orders, $1.1M) have high order volume and low gross profit.
 - **Online delivery got much faster.** Average delivery time fell from 8.7 days in 2016 to about 3 days from 2023 on, then leveled off. The overall online average is 3.25 days.
 - **Customer groups spend about the same.** Seniors and Mid-Life each have about 20K customers and Young Adults have 13K. Gross profit per customer is roughly $2.5K in all three groups, so the older groups contribute more because there are more of them. Gross profit splits 50/50 by gender.
@@ -28,19 +37,20 @@ The top 5 customers by gross profit were also reconciled three ways: a T-SQL que
 
 **Sales Breakdown:** Orders vs. gross profit by category, average delivery days, average delivery days by year, and total orders by year (drillable by quarter and month).
 
-![Contoso Sales Breakdown](./Contoso%20Sales%20Breakdown.png?v=3)
+![Contoso Sales Breakdown](./Contoso%20Sales%20Breakdown.png?v=4)
 
 **Store Performance:** Online vs. in-store split, top 10 stores, and online vs. in-store gross profit over time.
 
-![Contoso Store Performance](./Contoso%20Store%20Performance.png?v=5)
+![Contoso Store Performance](./Contoso%20Store%20Performance.png?v=6)
 
 **Customer Insights:** Gross profit by customer continent, age group, channel and gender, customers by age group, and a top 5 customers table ranked by gross profit. The top 5 re-ranks with the slicers, so selecting a store, time period or product category shows the top 5 customers within that slice.
 
-![Customer Insights](Contoso%20Customer%20Insights.png)
+![Customer Insights](Contoso%20Customer%20Insights.png?v=2)
 
 ## Notes on the Numbers
 
 - **Gross profit = revenue - cost.** Revenue is quantity x unit price and cost is quantity x unit cost. This uses list price, before discounts. Using net price (after discounts) gives $122.3M instead of $136.1M, about 10% lower.
+- **2016 is a partial year.** The data starts on May 18, 2016, so the 2016 order count (2,111) covers about 7.5 months and understates a full year.
 - **Average delivery days covers online orders only.** In-store orders have no delivery time (0 days), so including them would drag the average down to about 1.4.
 - **Age groups:** Young Adults = under 35, Mid-Life = 35 to 59, Seniors = 60 and over.
 - **"vs Prior" cards** compare against the previous period once a date is selected, so they show 0.0% with no date filter. The cost card has no good/bad coloring, because a cost increase isn't necessarily bad: higher costs often come with higher order counts. The other cards do get it.
@@ -61,6 +71,12 @@ The top 5 customers by gross profit were also reconciled three ways: a T-SQL que
 **Interactivity**
 - Four visuals have drill-down hierarchies: gross profit by year on Executive Overview, average delivery days by year and total orders by year on Sales Breakdown (all year > quarter > month), and gross profit by customer location on Customer Insights. Each one packs several levels of detail into a single visual, which freed up canvas space for other content. I left hierarchies off visuals that make one clear point, like the online vs. in-store trend behind the 2023 crossover.
 - The top 5 customers table uses a Top N filter on CustomerKey (not name, since many customers share a first name).
+
+**Visual formatting**
+- Converted all line charts to area charts and standardized them so trends read the same way on every page.
+- Raised area transparency from 60% to 75% so the charts with two y-axes are easier to read.
+- Added markers (without borders) so individual periods are easy to spot.
+- Removed horizontal and vertical gridlines to cut clutter.
 
 **DAX**
 - Measures and the Power Query (M) code: see [dax-and-m-code.md](dax-and-m-code.md)
