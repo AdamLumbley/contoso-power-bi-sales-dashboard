@@ -2,6 +2,8 @@
 
 A four-page Power BI report that turns about 224,000 sales lines (93,000 orders, 2016 to 2025) into answers an executive can act on: **$136M in gross profit at a 58.5% margin**, where it comes from, and how the business is shifting online. Built on SQLBI's Contoso Data Generator V2 (100K-order version) and cross-checked against a SQL Server database in T-SQL.
 
+**Download:** [Contoso Dashboard.pbix](Contoso%20Dashboard.pbix). Open it in Power BI Desktop (free, Windows) to explore the data model, DAX measures and interactive visuals.
+
 **Executive Overview:** Orders, revenue, cost, gross profit and margin %, gross profit by category and subcategory, and gross profit by year.
 
 ![Executive Overview](Contoso%20Overview.png)
@@ -24,9 +26,10 @@ The top 5 customers by gross profit were also reconciled three ways: a T-SQL que
 
 ## The Other Pages
 
-**Sales Breakdown:** Orders vs. gross profit by category, average delivery days, and average delivery days by year.
+**Sales Breakdown:** Orders vs. gross profit by category, average delivery days, average delivery days by year, and total orders by year (drillable by quarter and month).
 
 ![Contoso Sales Breakdown](./Contoso%20Sales%20Breakdown.png?v=3)
+
 **Store Performance:** Online vs. in-store split, top 10 stores, and online vs. in-store gross profit over time.
 
 ![Store Performance](Contoso%20Store%20Performance.png)
@@ -56,7 +59,7 @@ The top 5 customers by gross profit were also reconciled three ways: a T-SQL que
 - Star schema: a Sales fact table with Product, Store, Customer and Date dimensions.
 
 **Interactivity**
-- Three visuals have drill-down hierarchies: gross profit by year on Executive Overview and average delivery days on Sales Breakdown (both year > quarter > month), and gross profit by customer location on Customer Insights. Each one packs several levels of detail into a single visual, which freed up canvas space for other content. I left hierarchies off visuals that make one clear point, like the online vs. in-store trend behind the 2023 crossover.
+- Four visuals have drill-down hierarchies: gross profit by year on Executive Overview, average delivery days by year and total orders by year on Sales Breakdown (all year > quarter > month), and gross profit by customer location on Customer Insights. Each one packs several levels of detail into a single visual, which freed up canvas space for other content. I left hierarchies off visuals that make one clear point, like the online vs. in-store trend behind the 2023 crossover.
 - The top 5 customers table uses a Top N filter on CustomerKey (not name, since many customers share a first name).
 
 **DAX**
