@@ -32,7 +32,7 @@ The top 5 customers by gross profit were also reconciled three ways: a T-SQL que
 
 **Store Performance:** Online vs. in-store split, top 10 stores, and online vs. in-store gross profit over time.
 
-![Contoso Store Performance](https://githubusercontent.com)
+![Contoso Store Performance](Contoso%20Store%20Performance.png)
 
 **Customer Insights:** Gross profit by customer continent, age group, channel and gender, customers by age group, and a top 5 customers table ranked by gross profit. The top 5 re-ranks with the slicers, so selecting a store, time period or product category shows the top 5 customers within that slice.
 
