@@ -26,7 +26,7 @@ The top 5 customers by gross profit were also reconciled three ways: a T-SQL que
 
 **Sales Breakdown:** Orders vs. gross profit by category, average delivery days, and average delivery days by year.
 
-![Contoso Sales Breakdown](./Contoso%20Sales%20Breakdown.png)
+![Contoso Sales Breakdown](./Contoso%20Sales%20Breakdown.png?v=2)
 
 **Store Performance:** Online vs. in-store split, top 10 stores, and online vs. in-store gross profit over time.
 
