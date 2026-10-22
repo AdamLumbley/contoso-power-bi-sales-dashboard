@@ -4,6 +4,8 @@ A four-page Power BI report that turns about 224,000 sales lines (93,000 orders,
 
 **Download:** [Contoso.pbix](https://github.com/AdamLumbley/contoso-power-bi-sales-dashboard/raw/main/Contoso.pbix) (about 16 MB)
 
+**Source data:** SQLBI's [Contoso Data Generator V2 ready-to-use data](https://github.com/sql-bi/Contoso-Data-Generator-V2-Data/releases/tag/ready-to-use-data) (`csv-100k.7z`).
+
 **Executive Overview:** Orders, revenue, cost, gross profit and margin %, gross profit by category and subcategory, and gross profit by year.
 
 ![Executive Overview](Contoso%20Overview.png?v=2)
