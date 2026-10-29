@@ -1,5 +1,6 @@
 -- Exploration: top 5 customers by gross profit (list price basis)
 -- Contoso V2 100K, SQL Server
+
 WITH top_customers AS (
     SELECT  c.CustomerKey,
             c.GivenName,
@@ -15,6 +16,7 @@ FROM top_customers
 WHERE gross_profit_ranking <= 5;
 
 -- Exploration: total orders by customer gender
+
 WITH base AS (
     SELECT c.Gender,
            COUNT(DISTINCT s.OrderKey) AS Orders
@@ -26,6 +28,7 @@ SELECT * FROM base;
 
 -- Validation: gross profit by product category (list price basis)
 -- Matches DAX: Computers $58.6M, categories sum to $136.1M
+
 WITH gross_profit_by_product_category AS (
     SELECT p.CategoryName,
            SUM(s.UnitPrice * s.Quantity) - SUM(s.UnitCost * s.Quantity) AS gross_profit
