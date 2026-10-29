@@ -1,3 +1,29 @@
+-- Validation: gross profit by product category (matches DAX)
+
+WITH gross_profit_by_product_category AS (
+    SELECT p.CategoryName,
+           SUM(s.UnitPrice * s.Quantity) - SUM(s.UnitCost * s.Quantity) AS gross_profit
+    FROM Data.Sales s
+    JOIN Data.Product p ON s.ProductKey = p.ProductKey
+    GROUP BY p.CategoryName
+)
+SELECT *
+FROM gross_profit_by_product_category
+ORDER BY gross_profit DESC;
+
+-- Validation: total orders by year (matches DAX)
+
+WITH orders_by_year AS (
+    SELECT d.Year,
+           COUNT(DISTINCT s.OrderKey) AS total_orders
+    FROM Data.Sales s
+    JOIN Data.Date d ON s.OrderDate = d.Date
+    GROUP BY d.Year
+)
+SELECT *
+FROM orders_by_year
+ORDER BY Year;
+
 -- Exploration: top 5 customers by gross profit
 
 WITH top_customers AS (
@@ -12,7 +38,8 @@ WITH top_customers AS (
 )
 SELECT *
 FROM top_customers
-WHERE gross_profit_ranking <= 5;
+WHERE gross_profit_ranking <= 5
+ORDER BY gross_profit_ranking;
 
 -- Exploration: total orders by customer gender
 
@@ -23,17 +50,6 @@ WITH base AS (
     JOIN Data.Sales s ON c.CustomerKey = s.CustomerKey
     GROUP BY c.Gender
 )
-SELECT * FROM base;
-
--- Validation: gross profit by product category (matches DAX)
-
-WITH gross_profit_by_product_category AS (
-    SELECT p.CategoryName,
-           SUM(s.UnitPrice * s.Quantity) - SUM(s.UnitCost * s.Quantity) AS gross_profit
-    FROM Data.Sales s
-    JOIN Data.Product p ON s.ProductKey = p.ProductKey
-    GROUP BY p.CategoryName
-)
 SELECT *
-FROM gross_profit_by_product_category
-ORDER BY gross_profit DESC;
+FROM base
+ORDER BY Orders DESC;
