@@ -33,7 +33,7 @@ Don't click Refresh: the source CSVs live on my machine, and the data you see is
 
 The five headline KPIs (orders, revenue, cost, gross profit, margin %) were reconciled between the Power BI measures and T-SQL queries run against the Contoso V2 100K database in SQL Server Express. The results matched, for example gross profit of $136.1M.
 
-The top 5 customers by gross profit were also reconciled three ways: a T-SQL query ([top-5-customers.sql](top-5-customers.sql)), the Power BI table, and a DAX query in DAX Studio. All three returned the same five customers and the same figures (#1 Giselda Fallaci, $46,421.95).
+The top 5 customers by gross profit were also reconciled three ways: a T-SQL query ([sql-queries.sql](sql-queries.sql)), the Power BI table, and a DAX query in DAX Studio. All three returned the same five customers and the same figures (#1 Giselda Fallaci, $46,421.95).
 
 ## The Other Pages
 
@@ -90,7 +90,7 @@ Star schema with Sales as the fact table, related to Customer, Date, Product and
 
 **SQL validation**
 - Restored the Contoso V2 100K backup in SQL Server Express and queried it in SSMS with T-SQL to confirm the dashboard's totals.
-- Top 5 customers by gross profit (CTE and `DENSE_RANK()`): see [top-5-customers.sql](top-5-customers.sql)
+- Exploration and validation queries, including top 5 customers by gross profit (CTE and `DENSE_RANK()`): see [sql-queries.sql](sql-queries.sql)
 
 **AI assistance**
 - Used Claude to write some advanced DAX measures and M code.
