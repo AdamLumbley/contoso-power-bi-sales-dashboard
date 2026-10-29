@@ -16,7 +16,7 @@ A four-page Power BI report that turns about 224,000 sales lines (93,000 orders,
 2. Download [Contoso.pbix](https://github.com/AdamLumbley/contoso-power-bi-sales-dashboard/raw/main/Contoso.pbix). On GitHub, open the file page and click the download icon.
 3. Open it in Power BI Desktop. The data is stored inside the file, so there is nothing else to set up.
 
-Don't click Refresh: the source CSVs live on my machine, and the data you see is already loaded. Use the model view to see the star schema, and the Data pane to browse the DAX measures (organized in display folders). The file also has a hidden work-in-progress page that isn't part of the four-page report.
+Don't click Refresh: the source CSVs live on my machine, and the data you see is already loaded. See the [Data Model](#data-model) section below for the star schema, and use the Data pane to browse the DAX measures (organized in display folders). The file also has a hidden work-in-progress page that isn't part of the four-page report.
 
 ## Key Findings
 
@@ -49,6 +49,12 @@ The top 5 customers by gross profit were also reconciled three ways: a T-SQL que
 
 ![Customer Insights](Contoso%20Customer%20Insights.png?v=2)
 
+## Data Model
+
+Star schema with Sales as the fact table, related to Customer, Date, Product and Store dimensions. All measures live in a separate `_Measures` table, organized in display folders.
+
+![Contoso Semantic Model](Contoso%20Semantic%20Model.png)
+
 ## Notes on the Numbers
 
 - **Gross profit = revenue - cost.** Revenue is quantity x unit price and cost is quantity x unit cost. This uses list price, before discounts. Using net price (after discounts) gives $122.3M instead of $136.1M, about 10% lower.
@@ -68,7 +74,7 @@ The top 5 customers by gross profit were also reconciled three ways: a T-SQL que
 - Added an Age Group column (M code, written with AI assistance).
 
 **Data model**
-- Star schema: a Sales fact table with Product, Store, Customer and Date dimensions.
+- Star schema: a Sales fact table with Product, Store, Customer and Date dimensions (see [Data Model](#data-model)).
 
 **Interactivity**
 - Four visuals have drill-down hierarchies: gross profit by year on Executive Overview, average delivery days by year and total orders by year on Sales Breakdown (all year > quarter > month), and gross profit by customer location on Customer Insights. Each one packs several levels of detail into a single visual, which freed up canvas space for other content. I left hierarchies off visuals that make one clear point, like the online vs. in-store trend behind the 2023 crossover.
