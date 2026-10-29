@@ -1,5 +1,4 @@
--- Exploration: top 5 customers by gross profit (list price basis)
--- Contoso V2 100K, SQL Server
+-- Exploration: top 5 customers by gross profit
 
 WITH top_customers AS (
     SELECT  c.CustomerKey,
@@ -26,8 +25,7 @@ WITH base AS (
 )
 SELECT * FROM base;
 
--- Validation: gross profit by product category (list price basis)
--- Matches DAX: Computers $58.6M, categories sum to $136.1M
+-- Validation: gross profit by product category (matches DAX)
 
 WITH gross_profit_by_product_category AS (
     SELECT p.CategoryName,
