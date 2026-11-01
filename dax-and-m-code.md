@@ -167,8 +167,11 @@ IF (
 
 Most of the Power Query cleanup was done through the interface (renaming columns, setting data types, keeping nulls in non-key columns). This is the one step written as M code.
 
+
 ### Age Group
-*Written with AI assistance.* I wanted to look at gross profit by age, but the raw Age column has too many distinct values to chart clearly, so I grouped customers into three age buckets. I built it as a custom column in Power Query instead of a DAX calculated column, because data shaping like this is best done upstream, close to the source. The logic is similar to a DAX SWITCH or a SQL CASE statement.
+My gross profit by age query produced a table with 67 rows, one per distinct age. That is high cardinality for a human reader, though trivial for Power BI, so this was a readability problem, not a performance one. I bucketed customers into three groups (under 35, 35 to 59, 60 and over), cutting 67 rows to 3 and keeping the raw column in the model. I built it in Power Query instead of a DAX calculated column, because data shaping belongs upstream, close to the source.
+
+*I used Claude to quickly and accurately write the M code and to help set the age cutoffs.*
 
 ```m
 = Table.AddColumn(#"Changed Surname to Last Name", "Age Group", each
