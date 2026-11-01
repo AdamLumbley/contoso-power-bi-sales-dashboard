@@ -6,11 +6,11 @@ The code behind the Contoso report: DAX measures and the one Power Query step wr
 
 **Written by me:** the base measures (Total Revenue, Total Cost, Total Orders, Total Customers), the calculated measures built from them (Gross Profit, Margin %), and the time intelligence measures (prior year and YoY % for every KPI card).
 
-**Written with AI assistance:** Avg Delivery Days, Gross Profit YoY Label, Row Flag, and the Age Group step in Power Query (M). I described what each one needed to do and reviewed the results in the report to confirm they behaved correctly. I can read the M code (a conditional column: if this, then that, with a fallback value), but I can't write the syntax from scratch. I chose the age cutoffs with AI's help.
+**Written with AI assistance:** Avg Delivery Days, Gross Profit YoY Label, Row Flag, and the Age Group step in Power Query (M). For each one I specified what it needed to do, then checked the results in the report to confirm it behaved correctly. For the M step this was a deliberate choice: I use AI for M syntax instead of memorizing it, which gets the step done faster and leaves my time for modeling and DAX.
 
 ## Grain of the Sales table
 
-Before writing any measure, I checked what one row in `Sales` represents. Comparing the row count to the distinct order count answers it:
+Before writing any measure, I used DAX Studio to check what one row in `Sales` represents. Comparing the row count to the distinct order count answers it:
 
 ```dax
 EVALUATE
@@ -20,14 +20,14 @@ ROW (
 )
 ```
 
-Result: 223,974 rows and 93,470 distinct orders (about 2.4 lines per order). There are far more rows than orders, so the grain is the **order line** (one row per product on an order), not the order. That is typical for e-commerce data, and it drives two decisions in this model:
+Result: 223,974 rows and 93,470 distinct orders (about 2.4 lines per order). The grain is the **order line** (one row per product on an order), not the order. That is typical for e-commerce data, and it drives two decisions in this model:
 
-- **Orders are counted with DISTINCTCOUNT, not COUNTROWS.** Counting rows would report order lines as orders and overstate the order count about 2.4 times.
+- **Orders are counted with DISTINCTCOUNT, not COUNTROWS.** Counting rows would report order lines as orders.
 - **Revenue and cost are calculated per line with SUMX** (unit price × quantity), because quantity lives on each line.
 
 ## Display folders
 
-Measures are organized into display folders in the model:
+I organized the measures into six display folders so the model is easy to navigate and review:
 
 ```
 01 - Base Measures
