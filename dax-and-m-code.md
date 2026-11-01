@@ -4,7 +4,7 @@ The code behind the Contoso report: DAX measures and the one Power Query step wr
 
 ## Authorship
 
-**Written by me:** the base measures (Total Revenue, Total Cost, Total Orders, Total Customers), the calculated measures built from them (Gross Profit, Margin %), and the time intelligence measures (prior year and YoY % for every KPI card).
+**Written by me:** the base measures (Total Revenue, Total Cost, Total Orders, Total Customers, Total Stores), the calculated measures built from them (Gross Profit, Margin %), and the time intelligence measures (prior year and YoY % for every KPI card).
 
 **Written with AI assistance:** Avg Delivery Days, Gross Profit YoY Label, Row Flag, and the Age Group step in Power Query (M). For each one I specified what it needed to do, then checked the results in the report to confirm it behaved correctly. For the M step this was a deliberate choice: I use AI for M syntax instead of memorizing it, which gets the step done faster and leaves my time for modeling and DAX.
 
@@ -45,6 +45,7 @@ I organized the measures into six display folders so the model is easy to naviga
 | Total Revenue | List-price revenue before discounts |
 | Total Cost | Unit cost × quantity |
 | Total Orders / Total Customers | Distinct counts |
+| Total Stores | Count of stores |
 | Gross Profit | Revenue minus cost |
 | Margin % | Gross profit as a share of revenue |
 | PY / YoY % / Label (×5 KPI cards) | Prior year, year-over-year change, and the "vs Prior" text on each card |
@@ -77,6 +78,13 @@ Orders use DISTINCTCOUNT because the Sales table is at order-line grain (see abo
 Total Orders = DISTINCTCOUNT ( Sales[OrderKey] )
 
 Total Customers = DISTINCTCOUNT ( Sales[CustomerKey] )
+```
+
+#### Total Stores
+Stores are counted from the `Store` dimension table, which has one row per store.
+
+```dax
+Total Stores = COUNTROWS ( Store )
 ```
 
 ### Calculated measures
@@ -166,7 +174,6 @@ IF (
 ## Power Query (M)
 
 Most of the Power Query cleanup was done through the interface (renaming columns, setting data types, keeping nulls in non-key columns). This is the one step written as M code.
-
 
 ### Age Group
 My gross profit by age query produced a table with 67 rows, one per distinct age. That is high cardinality for a human reader, though trivial for Power BI, so this was a readability problem, not a performance one. I bucketed customers into three groups (under 35, 35 to 59, 60 and over), cutting 67 rows to 3 and keeping the raw column in the model. I built it in Power Query instead of a DAX calculated column, because data shaping belongs upstream, close to the source.
