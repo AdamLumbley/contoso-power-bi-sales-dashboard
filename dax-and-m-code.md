@@ -8,6 +8,36 @@ The code behind the Contoso report: DAX measures and the one Power Query step wr
 
 **Written with AI assistance:** Avg Delivery Days, Gross Profit YoY Label, Row Flag, and the Age Group step in Power Query (M). I described what each one needed to do and reviewed the results in the report to confirm they behaved correctly. I can read the M code (a conditional column: if this, then that, with a fallback value), but I can't write the syntax from scratch. I chose the age cutoffs with AI's help.
 
+## Grain of the Sales table
+
+Before writing any measure, I checked what one row in `Sales` represents. Comparing the row count to the distinct order count answers it:
+
+```dax
+EVALUATE
+ROW (
+    "Rows", COUNTROWS ( Sales ),
+    "Distinct Orders", DISTINCTCOUNT ( Sales[OrderKey] )
+)
+```
+
+Result: 223,974 rows and 93,470 distinct orders (about 2.4 lines per order). There are far more rows than orders, so the grain is the **order line** (one row per product on an order), not the order. That is typical for e-commerce data, and it drives two decisions in this model:
+
+- **Orders are counted with DISTINCTCOUNT, not COUNTROWS.** Counting rows would report order lines as orders and overstate the order count about 2.4 times.
+- **Revenue and cost are calculated per line with SUMX** (unit price × quantity), because quantity lives on each line.
+
+## Display folders
+
+Measures are organized into display folders in the model:
+
+```
+01 - Base Measures
+02 - Time Intelligence
+03 - Ratios
+04 - Labels
+05 - Row Flag
+06 - Delivery
+```
+
 ## Measure Index
 
 | Measure | What it does |
@@ -41,6 +71,7 @@ SUMX ( Sales, Sales[UnitCost] * Sales[Quantity] )
 ```
 
 #### Total Orders and Total Customers
+Orders use DISTINCTCOUNT because the Sales table is at order-line grain (see above).
 
 ```dax
 Total Orders = DISTINCTCOUNT ( Sales[OrderKey] )
