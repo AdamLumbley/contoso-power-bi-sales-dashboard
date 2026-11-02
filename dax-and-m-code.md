@@ -4,7 +4,7 @@ The code behind the Contoso report: DAX measures and the one Power Query step wr
 
 ## Authorship
 
-Core DAX is mine. AI assisted with niche extras: YoY labels, row flag, and delivery days.
+Core DAX is mine. AI assisted with YoY labels, row flag, and delivery days.
 
 ## Grain of the Sales table
 
