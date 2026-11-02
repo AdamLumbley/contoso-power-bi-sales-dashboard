@@ -93,8 +93,8 @@ Star schema with Sales as the fact table, related to Customer, Date, Product and
 - Exploration and validation queries, including top 5 customers by gross profit (CTE and `DENSE_RANK()`): see [sql-queries.sql](sql-queries.sql)
 
 **AI assistance**
-- Used Claude to write some advanced DAX measures and M code.
+- Used Claude to write the M code and a few DAX measures (YoY labels, row flag, delivery days).
 
 ## Tools
 
-Power BI Desktop, Power Query, DAX, DAX Studio, SQL Server Express, T-SQL (SSMS), Claude
+Power BI Desktop, Power Query, DAX, DAX Studio, SQL Server Express, T-SQL (SSMS), Google Sheets (formatting query output), Claude
