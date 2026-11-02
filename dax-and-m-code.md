@@ -4,9 +4,11 @@ The code behind the Contoso report: DAX measures and the one Power Query step wr
 
 ## Authorship
 
-**Written by me:** the base measures (Total Revenue, Total Cost, Total Orders, Total Customers, Total Stores), the calculated measures built from them (Gross Profit, Margin %), and the time intelligence measures (prior year and YoY % for every KPI card).
+**Written by me:** the base measures (Total Revenue, Total Cost, Total Orders, Total Customers, Total Stores), the calculated measures built from them (Gross Profit, Margin %), the time intelligence measures (prior year and YoY % for every KPI card), and the share-of-total query (added after the report shipped, see below).
 
 **Written with AI assistance:** Avg Delivery Days, Gross Profit YoY Label, Row Flag, and the Age Group step in Power Query (M). For each one I specified what it needed to do, then checked the results in the report to confirm it behaved correctly. For the M step this was a deliberate choice: I use AI for M syntax instead of memorizing it, which gets the step done faster and leaves my time for modeling and DAX.
+
+**Relearned with AI help:** the share-of-total pattern (CALCULATE with REMOVEFILTERS). I had used it once before and forgot the syntax, so I had Claude walk me through it, then rewrote it myself from scratch on a different column.
 
 ## Grain of the Sales table
 
@@ -51,6 +53,8 @@ I organized the measures into six display folders so the model is easy to naviga
 | PY / YoY % / Label (×5 KPI cards) | Prior year, year-over-year change, and the "vs Prior" text on each card |
 | Avg Delivery Days | Online orders only, order date to delivery date |
 | Row Flag | Hardcoded presentation highlight (not live logic) |
+
+The share-of-total query is a DAX Studio query, not a model measure, so it is not in this index.
 
 ## DAX
 
@@ -129,6 +133,29 @@ CALCULATE ( [Total Revenue], SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
 Total Revenue YoY % =
 DIVIDE ( [Total Revenue] - [Total Revenue PY], [Total Revenue PY] )
 ```
+
+### Share of total
+
+*Added after the report shipped.* The dashboard shows gross profit in dollars and does not use a percent-of-total view, so this is an extension, not part of the original analysis. It shows each product category's share of total gross profit.
+
+The key piece is the denominator. Each row of the table passes its own filter (for example, `Category = Games and Toys`) to `[Gross Profit]`. Wrapping the measure in `CALCULATE` with `REMOVEFILTERS` tells that one calculation to ignore the category filter, so it returns the grand total. Without it, every row would divide by itself and show 100%.
+
+```dax
+// Share of total gross profit by product category (REMOVEFILTERS denominator)
+EVALUATE
+SUMMARIZECOLUMNS (
+    'Product'[Category],
+    "Gross Profit", [Gross Profit],
+    "% of Total",
+        DIVIDE (
+            [Gross Profit],
+            CALCULATE ( [Gross Profit], REMOVEFILTERS ( 'Product'[Category] ) )
+        )
+)
+ORDER BY [Gross Profit] DESC
+```
+
+The same pattern works for any column, such as `Customer[Age Group]`.
 
 ### Delivery
 
