@@ -4,11 +4,7 @@ The code behind the Contoso report: DAX measures and the one Power Query step wr
 
 ## Authorship
 
-**Written by me:** the base measures (Total Revenue, Total Cost, Total Orders, Total Customers, Total Stores), the calculated measures built from them (Gross Profit, Margin %), the time intelligence measures (prior year and YoY % for every KPI card), and the share-of-total query (added after the report shipped, see below).
-
-**Written with AI assistance:** Avg Delivery Days, Gross Profit YoY Label, Row Flag, and the Age Group step in Power Query (M). For each one I specified what it needed to do, then checked the results in the report to confirm it behaved correctly. For the M step this was a deliberate choice: I use AI for M syntax instead of memorizing it, which gets the step done faster and leaves my time for modeling and DAX.
-
-**Relearned with AI help:** the share-of-total pattern (CALCULATE with REMOVEFILTERS). I had used it once before and forgot the syntax, so I had Claude walk me through it, then rewrote it myself from scratch on a different column.
+Core DAX is mine. AI assisted with niche extras: YoY labels, row flag, and delivery days.
 
 ## Grain of the Sales table
 
@@ -53,8 +49,6 @@ I organized the measures into six display folders so the model is easy to naviga
 | PY / YoY % / Label (×5 KPI cards) | Prior year, year-over-year change, and the "vs Prior" text on each card |
 | Avg Delivery Days | Online orders only, order date to delivery date |
 | Row Flag | Hardcoded presentation highlight (not live logic) |
-
-The share-of-total query is a DAX Studio query, not a model measure, so it is not in this index.
 
 ## DAX
 
@@ -134,14 +128,10 @@ Total Revenue YoY % =
 DIVIDE ( [Total Revenue] - [Total Revenue PY], [Total Revenue PY] )
 ```
 
-### Share of total
-
-*Added after the report shipped.* The dashboard shows gross profit in dollars and does not use a percent-of-total view, so this is an extension, not part of the original analysis. It shows each product category's share of total gross profit.
-
-The key piece is the denominator. Each row of the table passes its own filter (for example, `Category = Games and Toys`) to `[Gross Profit]`. Wrapping the measure in `CALCULATE` with `REMOVEFILTERS` tells that one calculation to ignore the category filter, so it returns the grand total. Without it, every row would divide by itself and show 100%.
+### % Share of Total Gross Profit
 
 ```dax
-// Share of total gross profit by product category (REMOVEFILTERS denominator)
+// Share of total gross profit by product category
 EVALUATE
 SUMMARIZECOLUMNS (
     'Product'[Category],
@@ -154,8 +144,6 @@ SUMMARIZECOLUMNS (
 )
 ORDER BY [Gross Profit] DESC
 ```
-
-The same pattern works for any column, such as `Customer[Age Group]`.
 
 ### Delivery
 
@@ -205,7 +193,7 @@ Most of the Power Query cleanup was done through the interface (renaming columns
 ### Age Group
 My gross profit by age query produced a table with 67 rows, one per distinct age. That is high cardinality for a human reader, though trivial for Power BI, so this was a readability problem, not a performance one. I bucketed customers into three groups (under 35, 35 to 59, 60 and over), cutting 67 rows to 3 and keeping the raw column in the model. I built it in Power Query instead of a DAX calculated column, because data shaping belongs upstream, close to the source.
 
-*I used Claude to quickly and accurately write the M code and to help set the age cutoffs.*
+*I used Claude to write the M code. The logic is a simple conditional, so it was easy to verify.*
 
 ```m
 = Table.AddColumn(#"Changed Surname to Last Name", "Age Group", each
