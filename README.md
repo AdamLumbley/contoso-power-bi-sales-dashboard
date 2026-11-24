@@ -1,6 +1,6 @@
 # Contoso Sales Dashboard (Power BI)
 
-A four-page Power BI report that turns about 224,000 sales lines (93,000 orders, 2016 to 2025) into answers an executive can act on: **$136M in gross profit at a 58.5% margin**, where it comes from, and how the business is shifting online. Built on SQLBI's Contoso Data Generator V2 (100K-order version) and cross-checked against a SQL Server database in T-SQL.
+A five-page Power BI report that turns about 224,000 sales lines (93,000 orders, 2016 to 2025) into answers an executive can act on: **$136M in gross profit at a 58.5% margin**, where it comes from, and how the business is shifting online. Built on SQLBI's Contoso Data Generator V2 (100K-order version) and cross-checked against a SQL Server database in T-SQL.
 
 **Download:** [Contoso.pbix](https://github.com/AdamLumbley/contoso-power-bi-sales-dashboard/raw/main/Contoso.pbix) (about 16 MB)
 
@@ -16,13 +16,15 @@ A four-page Power BI report that turns about 224,000 sales lines (93,000 orders,
 2. Download [Contoso.pbix](https://github.com/AdamLumbley/contoso-power-bi-sales-dashboard/raw/main/Contoso.pbix). On GitHub, open the file page and click the download icon.
 3. Open it in Power BI Desktop. The data is stored inside the file, so there is nothing else to set up.
 
-Don't click Refresh: the source CSVs live on my machine, and the data you see is already loaded. See the [Data Model](#data-model) section below for the star schema, and use the Data pane to browse the DAX measures (organized in display folders). The file also has a hidden work-in-progress page that isn't part of the four-page report.
+Don't click Refresh: the source CSVs live on my machine, and the data you see is already loaded. See the [Data Model](#data-model) section below for the star schema, and use the Data pane to browse the DAX measures (organized in display folders). The file also has a hidden work-in-progress page that isn't part of the five-page report.
 
 ## Key Findings
 
 - **Computers drive the business.** They account for $59M of $136M total gross profit (about 43%).
 - **Online passed in-store in 2023.** Online gross profit hit $14.7M vs. $12.6M in-store, and it has stayed ahead since. Over the full period, in-store is 60% of gross profit and online is 40%.
 - **Orders grew about 9x, peaked in 2023, then settled lower.** Annual orders rose from 2,111 in 2016 to a peak of 19,145 in 2023, with a dip in 2020. They then leveled off near 15.8K a year (15,899 in 2024 and 15,709 in 2025), about 18% below the peak.
+- **Each order earns less than it used to.** Gross profit per order peaked at about $1,790 in 2018 and fell to about $1,160 in 2025, a 35% drop, with no recovery. Orders grew through 2023, so the decline is in what each order earns, not just in how many orders there are.
+- **Computers fall the most.** Filtering by product category, computers' gross profit per order dropped by more than half from 2018 to 2025. Cameras and cell phones fell about 30%, while audio, TV and home appliances rose. The data doesn't show why (discounting, cheaper models and competition are all possible), so the cause is left open.
 - **Some categories sell a lot but earn little.** Music, Movies and Audio Books (30K orders, $7.9M) and Games and Toys (20K orders, $1.1M) have high order volume and low gross profit.
 - **Online delivery got much faster.** Average delivery time fell from 8.7 days in 2016 to about 3 days from 2023 on, then leveled off. The overall online average is 3.25 days.
 - **Customer groups spend about the same.** Seniors and Mid-Life each have about 20K customers and Young Adults have 13K. Gross profit per customer is roughly $2.5K in all three groups, so the older groups contribute more because there are more of them. Gross profit splits 50/50 by gender.
@@ -48,6 +50,10 @@ The top 5 customers by gross profit were also reconciled three ways: a T-SQL que
 **Customer Insights:** Gross profit by customer continent, age group, channel and gender, customers by age group, and a top 5 customers table ranked by gross profit. The top 5 re-ranks with the slicers, so selecting a store, time period or product category shows the top 5 customers within that slice.
 
 ![Customer Insights](Contoso%20Customer%20Insights.png?v=2)
+
+**Profitability Trends:** Gross profit per order by year, and gross profit per order alongside total orders (two y-axes). The slicers for order date, store, customer location and product category let you check whether any slice behaves differently.
+
+![Contoso Profitability Trends](Contoso%20Profitability%20Trends.png)
 
 ## Data Model
 
